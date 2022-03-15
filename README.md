@@ -8,6 +8,12 @@ This project was generated with [`django-hurricane-template`](https://github.com
 
 ## Prerequisites
 
-You will need:
+You're probably here because of our tutorial. 
+To follow its steps, you will need:
 
-- A running unikube project setup and target deployment
+- to be able to create a python virtualenv 
+- a local Kubernetes cluster (e.g. [k3d](https://k3d.io/v5.3.0/)) and [Helm](https://helm.sh/) for the Kubernetes part
+
+If you optionally want to experiment with [Unikube](https://unikube.io/), you will need:
+
+- A running Unikube project setup and target deployment
