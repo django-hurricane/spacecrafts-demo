@@ -8,9 +8,10 @@ description = "spacecrafts"
 version = "0.1.0"
 readme = "README.md"
 authors = ["blueshoe.de"]
-packages = [
-    { include = "src" },
-]
+# this needs to be included when running in a local virtualenv, but must not be included when building the Dockerfile
+# packages = [
+#     { include = "src" },
+# ]
 
 [tool.poetry.dependencies]
 python = "^3.8"
