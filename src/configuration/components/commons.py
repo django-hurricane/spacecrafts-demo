@@ -7,7 +7,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 
 from decouple import config
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from configuration.components import BASE_DIR
 
