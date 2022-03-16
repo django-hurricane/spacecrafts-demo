@@ -61,6 +61,7 @@ yamllint = "^1.26"
 safety = "^1.10"
 polint = "^0.4"
 ipython = "^7.25"
+black = "^22.1.0"
 
 [tool.black]
 line-length = 120
