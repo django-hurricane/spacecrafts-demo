@@ -1,0 +1,119 @@
+# Default values for spacecrafts.
+# All values default to development scenarios. They are to be overwritten for production-close environments.
+# These variables are shared across all environments
+
+replicaCount: 1
+
+image:
+  repository: quay.io/django-hurricane/spacecrafts-demo
+  tag: latest
+  pullPolicy: Always
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+podSecurityContext:
+  fsGroup: 1000
+  runAsUser: 1000
+
+containerPort:
+  name: http
+  portNumber: 8080
+
+containerProbePort: 9410
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+
+volumePermissions:
+  enabled: true
+
+service:
+  type: ClusterIP
+  port:
+    portNumber: 8080
+    name: http
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+#
+# Values for development environments
+#
+
+global:
+  environment: "development"
+  postgresql:
+    postgresqlUsername: spacecrafts_dev
+    existingSecret: spacecrafts-django-secrets
+
+environmentVariables:
+  DJANGO_DEBUG: True
+  DJANGO_ALLOWED_HOSTS: '*'
+
+serveStatic: true
+serveMedia: false
+
+assets:
+  assetsMountPath: "/var/django"
+  mediaPathPrefix: "/media/"
+  staticPathPrefix: "/static/"
+
+deploymentAnnotations: {}
+deploymentLabels: {}
+
+ingress:
+  enabled: true
+  className: ""
+  enableLetsencrypt: false
+  annotations: {}
+  hosts:
+    - host: spacecrafts.dev.127.0.0.1.nip.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          serviceName: spacecrafts
+          servicePort: 8080
+#          serviceName: spacecrafts
+#          servicePort: 8080
+  tls: []
+
+#
+# These variables generate a Kubernetes Secret with the following variables added to the containers ENV.
+# If you add variables here, please add the mapping in _env.tpl, too
+#
+secretEnvironmentVariables:
+    DJANGO_SECRET_KEY: 4eos6iu1bwxmkzwh618iuycw29yhcx0o0paxk4gxx3vomy0umcmcearaxzlxzy6nzjrlhivji7gmyofws34pa
+
+postgresql:
+    enabled: true
+    postgresqlDatabase: spacecrafts
+    postgresqlPassword: y7qh3n
+    volumePermissions:
+      enabled: true

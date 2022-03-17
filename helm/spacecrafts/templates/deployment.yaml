@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "spacecrafts.fullname" . }}
+  labels:
+    {{- include "spacecrafts.labels"  . | nindent 4 }}
+    {{- if .Values.deploymentLabels }}
+    {{- toYaml .Values.deploymentLabels | nindent 4 }}
+    {{- end }}
+  {{- if .Values.deploymentAnnotations }}
+  annotations:
+    {{- toYaml .Values.deploymentAnnotations | nindent 4 }}
+  {{- end }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "spacecrafts.selectorLabels"  . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- if .Values.podAnnotations }}
+        {{- toYaml .Values.podAnnotations | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "spacecrafts.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "spacecrafts.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ include "spacecrafts.fullname" . }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/bin/sh","-c"]
+          args: ["python manage.py serve
+                  --command 'migrate'
+                  --command 'collectstatic --no-input'
+                  --port {{ .Values.containerPort.portNumber }}
+                  --probe-port {{ .Values.containerProbePort }}
+                  {{- if .Values.serveStatic }}
+                  --static
+                  {{ end -}}
+                  {{- if .Values.serveMedia }}
+                  --media
+                  {{ end -}}
+                 "]
+          ports:
+            - name: {{ .Values.containerPort.name }}
+              containerPort: {{ .Values.containerPort.portNumber }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /alive
+              port: {{ .Values.containerProbePort }}
+            periodSeconds: 10
+            failureThreshold: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: {{ .Values.containerProbePort }}
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          startupProbe:
+            httpGet:
+              path: /startup
+              port: {{ .Values.containerProbePort }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            {{ include "spacecrafts.envVariables" . | nindent 12 }}
+          
+          envFrom:
+            - configMapRef:
+                name: spacecrafts-configmap
+      
+      initContainers:
+        # TODO: check with Michael!
+#        {{- if and .Values.volumePermissions.enabled .Values.podSecurityContext }}
+#        - name: volume-permissions
+#          image: docker.io/bitnami/bitnami-shell:10-debian-10-r125
+#          imagePullPolicy: "IfNotPresent"
+#          command:
+#            - /bin/bash
+#          args:
+#            - -ec
+#            - chown -R "{{ .Values.podSecurityContext.runAsUser }}:{{ .Values.podSecurityContext.fsGroup }}" "{{ default "/var/django/" .Values.assets.assetsMountPath }}"
+#          securityContext:
+#            runAsUser: 0
+#          {{- if .Values.volumePermissions.resources }}
+#          resources: {{- toYaml .Values.volumePermissions.resources | nindent 12 }}
+#          {{- end }}
+#          volumeMounts:
+#            - name: assets
+#              mountPath: {{ default "/var/django/" .Values.assets.assetsMountPath }}
+#        {{- end }}
+        
+        
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

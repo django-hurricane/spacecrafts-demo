@@ -1,10 +1,18 @@
 # spacecrafts
 
-This repository contains a simple Django app to create "Spacecrafts" with simple components. This app uses Django Graphene,
+## Django app
+
+In the `src`-directory this repository contains a simple Django app to create "Spacecrafts" with simple components. This app uses Django Graphene,
 enabling GraphQL functionality for Django app.
 It accompanies creation of basic django hurricane application in our tutorial for [Django Hurricane](https://django-hurricane.io/basic-app/)
 
 This project was generated with [`django-hurricane-template`](https://github.com/Blueshoe/django-hurricane-template). 
+
+## Helm charts
+
+In the `helm`-directory this repository contains helm charts to deploy the spacecrafts application.
+
+The helm charts were generated with [`hurricane-based-helm-template`](https://github.com/Blueshoe/hurricane-based-helm-template).
 
 ## Prerequisites
 
