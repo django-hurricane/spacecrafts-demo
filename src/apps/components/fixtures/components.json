@@ -1,0 +1,100 @@
+[
+{
+  "model": "components.category",
+  "pk": 1,
+  "fields": {
+    "title": "Power Source"
+  }
+},
+{
+  "model": "components.category",
+  "pk": 2,
+  "fields": {
+    "title": "Electronics"
+  }
+},
+{
+  "model": "components.category",
+  "pk": 3,
+  "fields": {
+    "title": "Hardware"
+  }
+},
+{
+  "model": "components.category",
+  "pk": 4,
+  "fields": {
+    "title": "Engines"
+  }
+},
+{
+  "model": "components.category",
+  "pk": 5,
+  "fields": {
+    "title": "Safety Tools"
+  }
+},
+{
+  "model": "components.component",
+  "pk": 1,
+  "fields": {
+    "title": "Stuff",
+    "description": "Important stuff",
+    "category": 3
+  }
+},
+{
+  "model": "components.component",
+  "pk": 2,
+  "fields": {
+    "title": "Batteries",
+    "description": "Django comes with batteries included!",
+    "category": 1
+  }
+},
+{
+  "model": "components.component",
+  "pk": 3,
+  "fields": {
+    "title": "Main engine",
+    "description": "The main engine",
+    "category": 4
+  }
+},
+{
+  "model": "components.component",
+  "pk": 4,
+  "fields": {
+    "title": "Hyperdrive",
+    "description": "To quote H.P. Baxxter: \"HYPER HYPER\"",
+    "category": 4
+  }
+},
+{
+  "model": "components.component",
+  "pk": 5,
+  "fields": {
+    "title": "Solar panel",
+    "description": "Of course we are eco-friendly!",
+    "category": 1
+  }
+},
+{
+  "model": "components.component",
+  "pk": 6,
+  "fields": {
+    "title": "Protective shield",
+    "description": "For when those aliens attack",
+    "category": 5
+  }
+},
+{
+  "model": "components.component",
+  "pk": 7,
+  "fields": {
+    "title": "Hurricane drive",
+    "description": "To speed you up for good!",
+    "category": 4
+  }
+}
+]
