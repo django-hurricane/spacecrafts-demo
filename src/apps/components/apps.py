@@ -10,4 +10,4 @@ class ComponentsConfig(AppConfig):
 
         from apps.components.checks import example_check_main_engine
 
-        register(example_check_main_engine, "hurricane")
+        register(example_check_main_engine, "hurricane", deploy=True)

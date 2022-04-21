@@ -15,7 +15,6 @@ def example_check_main_engine(app_configs=None, **kwargs):
     # your check logic here
     errors = []
     logger.info("Our check has been called :]")
-    # we need to wrap all sync calls to the database into a sync_to_async wrapper for hurricane to use it in async way
     if not Component.objects.filter(title="Main engine").exists():
         errors.append(
             Error(
