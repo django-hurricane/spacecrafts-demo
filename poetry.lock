@@ -253,12 +253,11 @@ Django = ">=1.11"
 
 [[package]]
 name = "django-hurricane"
-version = "0.9.2"
+version = "1.0.0"
 description = "Hurricane is an initiative to fit Django perfectly with Kubernetes."
 category = "main"
 optional = false
 python-versions = "~=3.8"
-develop = false
 
 [package.dependencies]
 asgiref = ">=3.4.0,<3.5.0"
@@ -270,12 +269,6 @@ tornado = ">=6.1,<7.0"
 [package.extras]
 debug = ["debugpy (>=1.5,<2.0)"]
 pycharm = ["pydevd-pycharm (>=213.5605.23,<213.5606.0)"]
-
-[package.source]
-type = "git"
-url = "https://github.com/django-hurricane/django-hurricane"
-reference = "71707aef1c0847ebb12901758dd65965fdc144f2"
-resolved_reference = "71707aef1c0847ebb12901758dd65965fdc144f2"
 
 [[package]]
 name = "django-permissions-policy"
@@ -1364,7 +1357,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "63591b3c3cdebc3f061f8877cf86707ef72a36233583b3df75531b5456ae315d"
+content-hash = "6fe3ec9e19d308a622678b33ab161cd7787b33f339857bd0595a56bbb10dd245"
 
 [metadata.files]
 alabaster = [
@@ -1575,7 +1568,10 @@ django-http-referrer-policy = [
     {file = "django-http-referrer-policy-1.1.1.tar.gz", hash = "sha256:917f5ed62054b27eff3172b7eccfb018469e85ddd538767328553282a70493c3"},
     {file = "django_http_referrer_policy-1.1.1-py2.py3-none-any.whl", hash = "sha256:7617d1256f1ab80c1a12bffdd8c8d24b94093eb1e21d035e2aa6d7d3c5ac999e"},
 ]
-django-hurricane = []
+django-hurricane = [
+    {file = "django-hurricane-1.0.0.tar.gz", hash = "sha256:286a51a934d0b536f18d635866f720bfaf7eb008051d4c03a6d90e8e557869d7"},
+    {file = "django_hurricane-1.0.0-py3-none-any.whl", hash = "sha256:9d777db015b9535dd3335605b35588da8d3f2a03b16a3cfda534a2209a9bc4f1"},
+]
 django-permissions-policy = [
     {file = "django-permissions-policy-4.9.0.tar.gz", hash = "sha256:1cbb4f7c9fdb2c583571b6a8fd61ca4b3f39535f8770900e918db6ac38b49e83"},
     {file = "django_permissions_policy-4.9.0-py3-none-any.whl", hash = "sha256:8bde3fcca657a013cf2a2695451f229a9b558f2de15e08ecb863b2303400cf8d"},

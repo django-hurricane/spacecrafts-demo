@@ -17,7 +17,7 @@ authors = ["blueshoe.de"]
 python = "^3.8"
 
 django = "^3.2"
-django-hurricane = {git = "https://github.com/django-hurricane/django-hurricane", rev = "71707aef1c0847ebb12901758dd65965fdc144f2"}
+django-hurricane = "^1.0.0"
 django-split-settings = "^1.0"
 django-http-referrer-policy = "^1.1"
 django-permissions-policy = "^4.1"
