@@ -27,16 +27,3 @@ jobs:
       - name: Lint with black
         run: |
           poetry run black --check src/
-      - name: Test with pytest and coverage
-        run: |
-          poetry run coverage run -m pytest src/
-        env:
-          DJANGO_SECRET_KEY: "secret"
-          DATABASE_ENGINE: "django.db.backends.sqlite3"
-          DATABASE_NAME: "db"
-          DATABASE_USER: ""
-          DATABASE_PASSWORD: ""
-          DATABASE_HOST: ""
-      - name: Coverage report
-        run: |
-          poetry run coverage report -m
