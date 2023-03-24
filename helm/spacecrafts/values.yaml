@@ -70,8 +70,13 @@ affinity: {}
 global:
   environment: "development"
   postgresql:
-    postgresqlUsername: spacecrafts_dev
-    existingSecret: spacecrafts-django-secrets
+    auth:
+      database: spacecrafts
+      username: spacecrafts_dev
+      existingSecret: spacecrafts-django-secrets
+      secretKeys:
+        adminPasswordKey: postgresql-postgres-password
+        userPasswordKey: postgresql-password
 
 environmentVariables:
   DJANGO_DEBUG: True
@@ -113,7 +118,9 @@ secretEnvironmentVariables:
 
 postgresql:
     enabled: true
-    postgresqlDatabase: spacecrafts
-    postgresqlPassword: y7qh3n
+    auth:
+      database: spacecrafts
+      username: spacecrafts_dev
+      password: y7qh3n
     volumePermissions:
       enabled: true
